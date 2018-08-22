@@ -54,6 +54,34 @@ catch let error {
  Create a Human class that has a name and age property. Also, create an initializer for this class to set its initial properties.
  */
 
+enum initError: Error {
+  case NoName
+  case NoAge
+}
+
+class Human {
+  var name: String
+  var age: Int
+  init(name:String?, age:Int?) throws {
+    guard let _ = name else {
+      throw initError.NoName
+    }
+    guard let _ = age else {
+      throw initError.NoAge
+    }
+    self.name = name!
+    self.age = age!
+  }
+}
+
+//do{
+  let human = try Human(name: "Wiljay", age: nil)
+  print("\(human.name),\(human.age)")
+//}
+//catch let error {
+//  print("Error:\(error)")
+//}
+
 
 /*:
  - Experiment:
@@ -71,7 +99,7 @@ catch let error {
  - Experiment:
  Test your Human class again but don't surround it with a do-catch block and use `try?` instead. What do you notice? (What is the value of the new human when an error is thrown?)
  */
-
+//it is empty
 
 /*:
  - Experiment:
@@ -116,8 +144,17 @@ class HondaDealership{
                             "CRV" : (price: 7000, count: 9),
                             "Prelude" : (price: 9000, count: 2)]
   
+  func sellCar(model: String, offeredPrice: Int){
+    availableCarSupply[model]!.count - 1
+  }
   
   
 }
+
+var honda = HondaDealership()
+honda.sellCar(model: "Civic", offeredPrice: 0)
+
+honda.availableCarSupply["Civic"]!.count
+
 
 //: [Next](@next)

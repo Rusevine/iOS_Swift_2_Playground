@@ -8,11 +8,15 @@
  Declare a optional Double value and set it to nil.
  */
 
+var myDouble : Double? = nil
+
 
 /*:
  - Experiment:
  Assign a value your optional Double.
  */
+
+myDouble = 5
 
 
 /*:
@@ -20,18 +24,34 @@
  Force unwrap the optional value. Why do you have to be careful about force unwrapping?
  */
 
+myDouble! = 3
+// it can cause errors
+
 
 /*:
  - Experiment:
  Use conditional unwrapping to verify if the optional has a value. Print the value if there is something, otherwise, print out to indicate there is no value present. Why is conditional unwrapping better than force unwrapping?
  */
 
+myDouble ?? 7
 
 /*:
  - Callout(Challenge):
  Create a function that removes the `nil` values from the array and returns a new array with only the valid Strings.
  */
 var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
+
+func removeNil (data: [String?]) -> [String?] {
+ var newArray = [String?]()
+  for obj in data {
+    if obj != nil {
+      newArray.append(obj)
+    }
+}
+  return newArray
+}
+
+removeNil(data: testData)
 
 
 /*:
@@ -41,9 +61,9 @@ var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
  Below is some test data you can use to test your function.
  */
 // Should pass all checks and print all information
-let username: String? = "user1"
-let password: String? = "password123"
-let email: String? = "user1@lighthouselabs.ca"
+//let username: String? = "user1"
+//let password: String? = "password123"
+//let email: String? = "user1@lighthouselabs.ca"
 
 // Should stop at password check and indicate password field is empty
 //let username: String? = "user1"
@@ -51,12 +71,26 @@ let email: String? = "user1@lighthouselabs.ca"
 //let email: String? = "user1@lighthouselabs.ca"
 
 // Should stop at username check and indicate username field is empty
-//let username: String? = nil
-//let password: String? = nil
-//let email: String? = "user1@lighthouselabs.ca"
+let username: String? = nil
+let password: String? = nil
+let email: String? = "user1@lighthouselabs.ca"
 
+func check(){
+guard let _ = username else {
+  print("Needs a username")
+  return
+}
+guard let _ = password else {
+  print("Needs password")
+  return
+}
+guard let _ = email else {
+  print("Needs email")
+  return
+}
+}
 
-
+check()
 /*:
  ## Guard Let
  Depending on how you finished the first challenge, the code you've written might not be as readable or optimal as it could be. So let's take a look at how we can improve this.
@@ -92,6 +126,12 @@ isMyNumberANegativeValue(myNumber: myNumber)
  Create a function that takes in two number parameters and divide them. We don't like dividing by zero, so ensure this doesn't happen. Otherwise, return the calculated value.
  */
 
+func divideBy (x: Int, y: Int) -> Int? {
+  guard y > 0 else {
+  return nil
+  }
+  return x / y
+}
 
 /*:
  Let's take a look at another example and see how we can use guard for optionals
@@ -124,6 +164,16 @@ isMyNumberAnOptional(myOptionalNumber: myOptionalNumber)
  Create a function that takes in an array of numbers. Have the function add all the numbers together and return the result. Make sure to `guard` against an empty array. Use `array.first` to check if there is at least one value in the array.
  */
 
+var numArray : [Int] = [1,2,3,4,5,6]
+
+func totalValue (array: [Int]) -> Int? {
+  guard let _ = array.first else {
+    return nil
+  }
+  return array.reduce(0, +)
+}
+
+totalValue(array: numArray)
 
 /*:
  - Callout(Challenge):

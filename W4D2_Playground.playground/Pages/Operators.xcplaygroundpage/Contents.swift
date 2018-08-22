@@ -46,7 +46,15 @@ let combinedValues = "abc" + 123
  Use the '*' operator to multiply a String and an Int. This returns a new String and repeats the given String the number of times delcared by the Int. ie: "abc" * 3 = "abcabcabc"
  */
 
+func * (left:String, right: Int) -> String {
+  var multiString = ""
+  for _ in 0..<right{
+   multiString.append("\(left)")
+  }
+  return multiString
+}
 
+let multiString = "abc" * 2
 /*:
  - Experiment:
  You can also overload the operators within an extension so it only affects this type. Add your own overload operators and you can even change the behaviour of existing ones. A `static` keyword is required for the functions and lie within the extension.
@@ -58,13 +66,13 @@ let combinedValues = "abc" + 123
 extension Int {
   
   // Comment this function in to try it!
-  //    static func + (left: Int, right: Int) -> Int{
-  //
-  //        return left - right
-  //    }
+      static func + (left: Int, right: Int) -> Int{
+  
+          return left - right
+      }
 }
 
-
+var test = 5+4
 /*:
  ### Custom Operators
  We can declare and implement our own custom operators in addition to the standard operators provided by Swift. Let's add new postfix operator called '+++' and we will have it double a number.

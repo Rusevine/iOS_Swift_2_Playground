@@ -33,6 +33,9 @@ printMyTwoNumbers(num1: "three", num2: "four")
  - Experiment:
  Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. (Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
  */
+//func multiplyNumbers<Element>(num1: Element, num2: Element) {
+// // print("\(num1 * num2)")
+//}
 
 
 /*:
@@ -41,7 +44,7 @@ printMyTwoNumbers(num1: "three", num2: "four")
  */
 
 func multiply<Element: Numeric>(num1: Element, num2: Element) {
-  
+  print("\(num1 * num2)")
 }
 
 
@@ -49,12 +52,33 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - Experiment:
  Update your multiplication function and test it! Try using different variable types to see what works and what doesn't.
  */
-
+multiply(num1: 1, num2: 2)
+multiply(num1: 1.0, num2: 2.0)
 
 /*:
  - Experiment:
  Write a generic function that takes in two parameters. One parameter is an array of elements, and the other is one element you are trying to find in the array. Return the index where the element exists in the array. ie: Given `[1,5,2,4]` and `'5'`, the returned index is `1`
  */
+func search<Element: Equatable>(item1: [Element], item2: Element) {
+  guard item1.contains(item2) else {
+    print("Not in array")
+    return
+  }
+  var count = 0
+  for item in item1 {
+    if item == item2 {
+      print("Index \(count)")
+    } else {
+      count = count + 1
+    }
+  }
+}
+
+let arr = ["Cat","Pig","Turtle","Dog"]
+let find = "Turtle"
+
+search(item1: arr, item2: find)
+
 /*:
  - Note:
  For this experiment, refrain from using the array method `indexOf`. Also the protocol `Equatable` might be useful here. Search it up to see what it's about.
@@ -74,6 +98,26 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - enqueue: add an item to the queue
  - dequeue: remove an item from the queue, and return the removed element
  */
+
+struct Queue<Element> {
+  var items = [Element]()
+  mutating func enqueue(item: Element) {
+    items.append(item)
+  }
+  mutating func dequeue() -> Element {
+    return items.remove(at: 0)
+  }
+}
+
+var queue = Queue<Any>()
+queue.enqueue(item: "Dog")
+queue.enqueue(item: "Cat")
+queue.enqueue(item: "Fish")
+queue.items
+queue.dequeue()
+queue.items
+
+
 
 
 
